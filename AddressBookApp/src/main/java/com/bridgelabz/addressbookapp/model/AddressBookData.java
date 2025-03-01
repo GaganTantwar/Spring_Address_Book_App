@@ -30,5 +30,9 @@ public class AddressBookData {
     public void setAddress(String address){
         this.address=address;
     }
+    @Override
+    public String toString(){
+        return "Address "+phone+" "+name+" "+" "+address;
+    }
 }
 

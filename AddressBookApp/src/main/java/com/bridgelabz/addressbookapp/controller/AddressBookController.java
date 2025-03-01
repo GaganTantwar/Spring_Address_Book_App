@@ -46,10 +46,10 @@ public class AddressBookController {
     }
 
     // Endpoint to update existing address book data
-    @PutMapping("/update")
-    public ResponseEntity<ResponseDTO> updateAddressBookData(@RequestBody AddressDTO addressDTO){
+    @PutMapping("/update/{phone}")
+    public ResponseEntity<ResponseDTO> updateAddressBookData(@PathVariable("phone") long phone, @RequestBody AddressDTO addressDTO){
         AddressBookData addData=null;
-        addData=addressBookAppService.updateAddressBookData(addressDTO);
+        addData=addressBookAppService.updateAddressBookData(phone,addressDTO);
         ResponseDTO responseDTO=new ResponseDTO("Updation of Address book Data is Successful",addData);
         return  new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
     }
@@ -57,6 +57,7 @@ public class AddressBookController {
     // Endpoint to delete address book data by phone number
     @DeleteMapping("/delete/{phone}")
     public ResponseEntity<ResponseDTO> deleteAddressBookData(@PathVariable("phone") long phone){
+        addressBookAppService.deleteAddressBookData(phone);
         ResponseDTO responseDTO=new ResponseDTO("Deletion of Employee Book Data is Successful by Phone",phone);
         return  new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
     }
