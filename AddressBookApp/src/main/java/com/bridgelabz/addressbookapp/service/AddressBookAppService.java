@@ -1,6 +1,7 @@
 package com.bridgelabz.addressbookapp.service;
 
 import com.bridgelabz.addressbookapp.dto.AddressDTO;
+import com.bridgelabz.addressbookapp.exception.AddressBookException;
 import com.bridgelabz.addressbookapp.model.AddressBookData;
 import org.springframework.stereotype.Service;
 
@@ -21,13 +22,7 @@ public class AddressBookAppService implements InterfaceAddressBookAppService {
     // Method to get address book data by phone number
     @Override
     public AddressBookData getAddressBookDataByPhone(long phone) {
-        for (AddressBookData address : addressBookList) {
-            System.out.println(address.toString());
-            if (address.getPhone() == phone) {
-                return address;
-            }
-        }
-        return null; // Return null if no data is found
+        return addressBookList.stream().filter(empData->empData.getPhone()==phone).findFirst().orElseThrow(()->new AddressBookException("Person Not Found"));// Return null if no data is found
     }
 
     // Method to create new address book data
