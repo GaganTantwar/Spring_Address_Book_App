@@ -7,6 +7,8 @@ import com.bridgelabz.addressbookapp.service.AddressBookAppService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.amqp.RabbitConnectionDetails;
 import org.springframework.http.HttpStatus;
+import jakarta.validation.Valid;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.*;
@@ -37,7 +39,7 @@ public class AddressBookController {
 
     // Endpoint to create new address book data
     @PostMapping("/create/{phone}")
-    public ResponseEntity<ResponseDTO> addAddressBookData(@PathVariable ("phone") long phone,@RequestBody AddressDTO addressDTO){
+    public ResponseEntity<ResponseDTO> addAddressBookData(@PathVariable ("phone") long phone, @Valid @RequestBody AddressDTO addressDTO){
         AddressBookData addData=null;
         addData=addressBookAppService.createAddressBookData(phone,addressDTO);
         ResponseDTO responseDTO=new ResponseDTO("Creation of Address Book Data is Successfull ",addData);
