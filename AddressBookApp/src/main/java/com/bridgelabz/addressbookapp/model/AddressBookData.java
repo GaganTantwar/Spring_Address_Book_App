@@ -11,25 +11,26 @@ import lombok.ToString;
 @Entity
 @Table(name="address_book")
 public @Data class AddressBookData {
-    @Id
-    private long phone;
     @Column(name="FullName")
     private String name;
-    private String address;
     private String city;
+    private String address;
     private String state;
     private String zipcode;
+    @Id
+    private long phone;
     public AddressBookData(){}
     public AddressBookData(long phone,AddressDTO addressDTO){
         this.updateAddressBookData(phone,addressDTO);
     }
     public void updateAddressBookData(long phone, AddressDTO addressDTO){
-        this.phone=phone;
         this.name=addressDTO.name;
         this.address=addressDTO.address;
-        this.state=addressDTO.state;
         this.city=addressDTO.city;
+        this.state=addressDTO.state;
         this.zipcode=addressDTO.zipcode;
+        this.phone=phone;
+
     }
 }
 
