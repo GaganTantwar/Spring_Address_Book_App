@@ -27,6 +27,10 @@ public class AddressBookAppService implements InterfaceAddressBookAppService {
     public AddressBookData getAddressBookDataByPhone(long phone) {
         return addressBookRepository.findById(phone).orElseThrow(()-> new AddressBookException("Person Not Found"));
     }
+    @Override
+    public List<AddressBookData> getAddressByCity(String city){
+        return addressBookRepository.findByCity(city);
+    }
 
     // Method to create new address book data
     @Override

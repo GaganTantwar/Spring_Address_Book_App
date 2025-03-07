@@ -13,7 +13,7 @@ public interface InterfaceAddressBookAppService {
 
     // Method to get address book data by phone number
     AddressBookData getAddressBookDataByPhone(long phone);
-
+    List<AddressBookData> getAddressByCity(String city);
     // Method to create new address book data
     AddressBookData createAddressBookData(long phone, AddressDTO addressDTO);
 

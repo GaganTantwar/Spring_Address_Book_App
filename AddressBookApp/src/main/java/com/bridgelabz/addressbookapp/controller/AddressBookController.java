@@ -36,6 +36,13 @@ public class AddressBookController {
         return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
 
     }
+    @GetMapping("/city/{city}")
+    public ResponseEntity<ResponseDTO> getEmployeeData(@PathVariable("city") String city){
+        List<AddressBookData> addDataList=null;
+        addDataList=addressBookAppService.getAddressByCity(city);
+        ResponseDTO responseDTO=new ResponseDTO("Get Call Success by city",addDataList);
+        return new ResponseEntity<ResponseDTO>(responseDTO,HttpStatus.OK);
+    }
 
     // Endpoint to create new address book data
     @PostMapping("/create/{phone}")
