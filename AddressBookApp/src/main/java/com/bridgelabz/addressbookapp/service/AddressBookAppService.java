@@ -3,13 +3,16 @@ package com.bridgelabz.addressbookapp.service;
 import com.bridgelabz.addressbookapp.dto.AddressDTO;
 import com.bridgelabz.addressbookapp.exception.AddressBookException;
 import com.bridgelabz.addressbookapp.model.AddressBookData;
+import com.bridgelabz.addressbookapp.repository.AddressBookRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
 
 @Service
 public class AddressBookAppService implements InterfaceAddressBookAppService {
-
+    @Autowired
+    AddressBookRepository addressBookRepository;
     // List to store address book data
     List<AddressBookData> addressBookList = new ArrayList<>();
 
@@ -31,7 +34,7 @@ public class AddressBookAppService implements InterfaceAddressBookAppService {
         AddressBookData addData = null;
         addData = new AddressBookData(phone, data); // Create new address book data
         addressBookList.add(addData); // Add new data to the list
-        return addData;
+        return addressBookRepository.save(addData);
     }
 
     // Method to update existing address book data
